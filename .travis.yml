@@ -9,7 +9,6 @@ env:
   - secure: T0pHKDD372hInbHpbTDxLz+j+aUxQjN8Q9wWDdEXmm0DZg0HMth/LIEmz1xSFAb2Z713PHSece8kTiaFTN+nifPEVBoo8CTfTpl7Gyexud9wkEjOIDQKGVpVI6ldWLnCbcnl81CzPPvndM+y7z010PjODjf6DyIuw0PzATo5dcnPeClcibOzGKCqximokRpkPHl9lmMtOEHV9hXsHftt8PNX8R1zufW0bPzNTKU+Z4I5ScnWi87btwcxF++HClD2N6egiD5cD6Ymzc6Jot/dAASdcxtMVuuXl7rmvruUUTBspGsINfdDOEiqLirA9/SfAAiSGEG4o7usdWQvUEV3rNidT9eien3cs2l/fo81ln3xg06LDRhnimqBZKhl8lzGkVNUTzxielMan7F285Yz5gf+r/jYfqlG/U99kvXLDxfUAwfDuyKUrpDdYtmdurzhHukZFoWwFUKrqOBlZZejXAtgGfenpQ1IJJGCKBNV03AAR1ISMyDOGwoIrc8bieoHlcP7dg/Bgy7w2kdOpx5QZhfg3Yd0KPIlYJZQv12EOhhHqq80DJlmUQ5sN58OZooQdaoEugTd92NXZ47fiGuyPGLFU84S7mX7WSj3nq9Ixc+TWf5OlEDxfKsGhms8ILereNb8j1UCLQrVrltt8ypn03M3ocnnizQtUD2d/wg1Mqs=
 script:
 - ls -alh
-after_success:
 - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 - export REPO=netsyos/docker-base
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
@@ -17,3 +16,5 @@ after_success:
 - docker tag $REPO:$COMMIT $REPO:$TAG
 - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
 - docker push $REPO
+after_success:
+- date
