@@ -11,10 +11,13 @@ script:
 - ls -alh
 - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 - export REPO=netsyos/docker-base
-- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
 - docker build -f Dockerfile -t $REPO:$COMMIT .
 - docker tag $REPO:$COMMIT $REPO:$TAG
 - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
 - docker push $REPO
 after_success:
 - date
+notifications:
+  slack:
+    secure: OENhLo7XRzxDQtKSndnBBdn1PhCCQWVgRh4Zrv+HVZTZIFkJ/nmdfIQkBHMAtbqyAwKC+KmFxQqsxWYds5Ay3yWbTeyP52Pr5kL7Pxl7SdDLg5zl2qhTsYSCQF+93tWj6c/d+A87WCaVm08a18Px7K/HOKept9TQvHzkitfOp5MDVSPt2tjjKH4fbrmiq2b3eLGigRZ17iTge4l/Vz1NlB5ZLTSx9XsTTn0eXuFd0KYp9M+IdfRWQ3D0p1pnOjuzUDRYv9WFIsuquaVp/oZTmR4i1X6cf8SrwpLXS+u9oeUvfeX2eBG9VDFWp7MNEUxiQUdbau5jAj8znCAJe4jn8iVsXnjGUiz/yCSB3ouO0jQpXE3c2TCg7NPLUDeREc8wf/1rn7B/1B0cJod5HZvbJCla2ZVqrBRgEsSG3Z41fvIdofP8PYM9EOZPUzVQAV2+z7WxJdZoeVBrgpYxUH8+j3LwB+3EMqlwOZYSg0T1x1GTF4A1mGAglQ2T/ez1WGgL6T6PaxIhoHgmYCZLAUA60Ia8Nhob1uCCuyJMDAGpJGElr4VaDYqL2b2Fp8ulhc4ajgdIrLxoeRR+kx0WzrePimG7cT0BfmObdaVY7Najmy7CNoMPfzW7uaRKT5UUcuAyLTIfg/+jwakQlSeolxCYWIXCb7dqXizUM7sWknlGTEA=
