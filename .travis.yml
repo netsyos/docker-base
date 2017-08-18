@@ -7,6 +7,8 @@ env:
 #    - secure: "UkF2CHX0lUZ...VI/LE=" # DOCKER_EMAIL
 #    - secure: "Z3fdBNPt5hR...VI/LE=" # DOCKER_USER
 #    - secure: "F4XbD6WybHC...VI/LE=" # DOCKER_PASS
+script:
+  - ls -alh
 after_success:
 #  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
   - export REPO=netsyos/docker-base
