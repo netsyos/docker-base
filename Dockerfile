@@ -11,8 +11,9 @@ CMD ["/sbin/my_init"]
 RUN apt-get update
 
 RUN apt-get -y install sudo acl strace dialog net-tools lynx nano vim wget curl htop unzip
-RUN apt-get -y install python-software-properties
-RUN apt-get -y install dnsmasq iputils-ping
+
+ADD init/00_init.sh /etc/my_init.d/00_init.sh
+RUN chmod +x /etc/my_init.d/00_init.sh
 
 # Clean up APT when done.
 #RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
