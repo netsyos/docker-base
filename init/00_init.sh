@@ -1,8 +1,11 @@
 #!/bin/bash
-CONFIG_SCRIPT=/data/container_config/configure.sh
+if [ -z "$CONFIG_SCRIPT" ]; then
+    CONFIG_SCRIPT=/data/container_config/configure.sh
+fi
+
 if [ -x "$CONFIG_SCRIPT" ]; then
-  # Control will enter here if $DIRECTORY exists.
-  exec $CONFIG_SCRIPT
+    # Control will enter here if $DIRECTORY exists.
+    exec $CONFIG_SCRIPT
 else
-	echo $CONFIG_SCRIPT
+    echo "no configure script"
 fi
